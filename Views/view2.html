@@ -1,0 +1,23 @@
+<h1>Here are your friends!</h1>
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="per in person.data">
+                <td contenteditable="true">{{per.name}}</td>
+                <td contenteditable="true">{{per.address}}</td>
+                <td contenteditable="true">{{per.age}}</td>
+                <td><button ng-click="person.deletePerson(per._id)">Delete</button> </td>
+                <td><button ng-click="person.updatePerson(per._id)">Update</button></td>
+            </tr>
+        </tbody>    
+    </table>
+</div>
