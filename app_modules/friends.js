@@ -12,7 +12,10 @@ exports.addFriend = function(req,res){
         }
         else{
             
-            res.send("New friend added");
+            friends.User.update({username:req.session.username},
+                                {$push:{'friend':temp._id}},function(err,data){
+                                    res.send('Ok');
+                                });
         }
     });
 }
@@ -36,6 +39,19 @@ exports.deleteFriend = function(req,res){
 
 exports.getAllFriends = function(req,res){
     
+    friends.User.findOne({username:req.session.username}).populate('friend').exec(function(err,data){
+        
+        if(err){
+            
+            res.send("Something went wrong");
+        }
+        else{
+            
+            res.send(data.friend);
+        }
+        
+    });
+    /*
     friends.Friends.find(function(err,data){
         
         if(err){
@@ -47,12 +63,11 @@ exports.getAllFriends = function(req,res){
             res.send(data);
         }
         
-    });
+    });*/
 }
 
 exports.updateFriend = function(req,res){
     
-    console.log(req.body);
     friends.Friends.update({_id:req.body._id},{name:req.body.name,address:req.body.address,age:req.body.age},function(err,data){
         console.log(err);
         console.log(data);
