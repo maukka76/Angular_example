@@ -6,6 +6,12 @@ my_module.controller('loginController',function($scope,$resource,$location){
     
     $scope.login.login = function(){
         
+        if(!$scope.login.username || !$scope.login.password){
+            
+            alert('Give user name and password');
+            return;
+        }
+        
         var loginData = {
             
             username:$scope.login.username,
@@ -16,12 +22,16 @@ my_module.controller('loginController',function($scope,$resource,$location){
         req.post(loginData).$promise.then(function(data){
             
             //If login was ok
-            if(data.status === "Ok"){
-                
+            if(data.success){
+                //Store jwt token in sessionStorage.
+                //This token is sent back to server in every request
+                sessionStorage['access-token'] = data.token;
+                sessionStorage['logged'] = true;
                 $location.path('/main');
+
             }else{
                 
-                $(".error").text(data.status);
+                $(".error").text(data.message);
             }
         });
     }
@@ -33,7 +43,6 @@ my_module.controller('loginController',function($scope,$resource,$location){
             username:$scope.login.username,
             password:$scope.login.password
         }
-        
         var req = $resource('/user/register',{},{'post':{method:'POST'}});
         req.post(loginData).$promise.then(function(data){
             

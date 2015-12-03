@@ -15,6 +15,7 @@ exports.addFriend = function(req,res){
             friends.User.update({username:req.session.username},
                                 {$push:{'friend':temp._id}},function(err,data){
                                     res.send('Ok');
+                                    req.session.listofFriends = [];
                                 });
         }
     });
@@ -47,7 +48,13 @@ exports.getAllFriends = function(req,res){
         }
         else{
             
-            res.send(data.friend);
+            //req.session.listofFriends = data.friend;
+            if(data){
+                res.send(data.friend);
+            }
+            else{
+                res.send('Something went wrong');
+            }
         }
         
     });

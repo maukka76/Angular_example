@@ -1,15 +1,32 @@
 
-<form>
-    <h4>Add new person</h4>
-    <div class="form-group">
-    <input class="form-control" type="text" placeholder="Name" ng-model="person.name"/>
+<!--<div ng-include src="'navbar.html'"></div>-->
+<angular-navbar></angular-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <form>
+                <h4>Add new person</h4>
+                <div class="form-group">
+                <input class="form-control" type="text" placeholder="Name" ng-model="person.name"/>
+                </div>
+                <div class="form-group">
+                <input class="form-control" type="text" placeholder="Address" ng-model="person.address"/>
+                </div>
+                <div class="form-group">
+                <input class="form-control" type="text" placeholder="Age" ng-model="person.age"/>
+                </div>
+                <input class="btn btn-default" type="button" value="Save" ng-click="person.addPerson()"/>
+            </form>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class ="jumbotron visible-lg text-success">
+              <h1>Add Person to database</h1>
+              <p>Fill up the information required and hit save button to save it to database</p>
+
+              <p>
+                 <a class = "btn btn-primary btn-lg" role = "button">Learn more</a>
+              </p>
+           </div>
+        </div>
     </div>
-    <div class="form-group">
-    <input class="form-control" type="text" placeholder="Address" ng-model="person.address"/>
-    </div>
-    <div class="form-group">
-    <input class="form-control" type="text" placeholder="Age" ng-model="person.age"/>
-    </div>
-    <input class="btn btn-default" type="button" value="Save" ng-click="person.addPerson()"/>
-</form>
-<a href="#/friends">Show view 2</a>
+</div>

@@ -1,6 +1,6 @@
 var db = require('./database');
-
-
+var app = require('../app');
+var jwt = require('jsonwebtoken');
 exports.login = function(req,res){
     
     db.User.findOne({username:req.body.username,password:req.body.password},function(err,data){
@@ -10,15 +10,17 @@ exports.login = function(req,res){
             res.send({status:err});
         }
         else{
-            
+            //Succesfull login
             if(data){
-                console.log(data);
+                
                 req.session.username = data.username;
-                res.send({status:"Ok"});
+                var token = jwt.sign(data,app.secret,{expiresIn:'2h'});
+                console.log(token);
+                res.json({success:true,token:token});
             }
             else{
                 
-                res.send({status:"Fail"});
+                res.send(401,'Wrong username or password');
             }
         }
     });

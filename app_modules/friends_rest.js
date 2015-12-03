@@ -7,7 +7,13 @@ var router = express.Router();
 //************REST API for Friends collection**************//
 router.get("/",function(req,res){
     
-    friends.getAllFriends(req,res);
+    if(req.session.listofFriends && req.session.listofFriends.length > 0)
+    {
+        res.send(req.session.listofFriends);
+    }
+    else{
+        friends.getAllFriends(req,res);
+    }
 });
 
 router.post("/",function(req,res){

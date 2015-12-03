@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "^4.13.3",
     "express-session": "^1.12.1",
-    "mongoose": "^4.1.12"
+    "jsonwebtoken": "^5.4.1",
+    "mongoose": "^4.1.12",
+    "node-uuid": "^1.4.7"
   }
 }
